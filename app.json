@@ -1,0 +1,20 @@
+{
+    "name": "postgree-apoi",
+    "description": "api postgree",
+    "logo": "",
+    "keywords": ["postgree"],
+    
+    "addons": [
+        {
+          "plan": "heroku-postgresql",
+          "options": {
+            "version": "9.5"
+          }
+        }
+      ],
+
+    "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+        }]
+  }
