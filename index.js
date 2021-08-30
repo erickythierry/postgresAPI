@@ -46,7 +46,7 @@ async function getlogins() {
     } catch {
         console.log('criando banco de dados...')
         await db.query('CREATE TABLE logins(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
-        await getlogins();
+        return undefined
     }
 
 }
