@@ -24,7 +24,7 @@ app.get('/', function(req, res){
 
 app.get('/getlogins', function(req, res){
     
-    if (req.body.token!=token){res.send("erro: token incorreto");}
+    if (req.body.token!=token){res.send("erro: token incorreto/inexistente");}
 
     getlogins().then((logins)=>{
         res.json(logins);  
@@ -33,7 +33,7 @@ app.get('/getlogins', function(req, res){
 
 app.post('/newlogin', function(req, res){
 
-    if (req.body.token!=token){res.send("erro: token incorreto");}
+    if (req.body.token!=token){res.send("erro: token incorreto/inexistente");}
     
     jsonlogin = req.body
     console.log(jsonlogin)
@@ -44,7 +44,7 @@ app.post('/newlogin', function(req, res){
 
 app.post('/select', function(req, res){
 
-    if (req.body.token!=token){res.send("erro: token incorreto");}
+    if (req.body.token!=token){res.send("erro: token incorreto/inexistente");}
     
     querybody = req.body
     select(querybody.query).then((data) =>{
@@ -55,7 +55,7 @@ app.post('/select', function(req, res){
 
 app.post('/insert', function(req, res){
 
-    if (req.body.token!=token){res.send("erro: token incorreto");}
+    if (req.body.token!=token){res.send("erro: token incorreto/inexistente");}
 
     querybody = req.body
     insert(querybody.query).then((data) =>{
@@ -65,7 +65,7 @@ app.post('/insert', function(req, res){
 
 app.post('/delete', function(req, res){
 
-    if (req.body.token!=token){res.send("erro: token incorreto");}
+    if (req.body.token!=token){res.send("erro: token incorreto/inexistente");}
 
     querybody = req.body
     deleteQuery(querybody.query).then((data) =>{
