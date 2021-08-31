@@ -14,13 +14,15 @@ app.listen(porta, function(){
 });
 
 app.get('/getlogins', function(req, res){
-    logins = getlogins()
-    console.log(logins)
-    if (logins!=undefined){
-        res.json({'sucess': true, "result": logins});
-    }else{
-        res.json({'sucess': false, "result": 'sem logins'});
-    }
+    getlogins().then((logins)=>{
+        console.log(logins)
+        if (logins){
+            res.json({'sucess': true, "result": logins});
+        }else{
+            res.json({'sucess': false, "result": 'sem logins'});
+        }
+    })
+    
     
 })
 
