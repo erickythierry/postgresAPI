@@ -36,7 +36,7 @@ app.post('/select', function(req, res){
 app.post('/insert', function(req, res){
     
     querybody = req.body
-    addNewLogin(querybody.query).then((data) =>{
+    insert(querybody.query).then((data) =>{
         res.json(data);
     })
 
@@ -85,6 +85,19 @@ async function addNewLogin(loginJson) {
     try {
         db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
         db.query('commit;')
+        return true
+    } catch (error) {
+        console.log(error)
+        return undefined
+    }
+    
+}
+async function insert(querytext) {
+    try {
+        makeinsert = await db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
+        makecommit = await db.query('commit;')
+        console.log('insert ', makeinsert)
+        console.log('commit ', makecommit)
         return true
     } catch (error) {
         console.log(error)
