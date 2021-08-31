@@ -1,5 +1,6 @@
 const db = require('./database');
 const express = require('express');
+var bodyParser = require('body-parser');
 
 
 const app = express();
@@ -17,14 +18,13 @@ app.get('/getlogins', function(req, res){
     
     getlogins().then((logins)=>{
         console.log(logins)
-        if (logins.sucess){
-            res.json(logins);
-        }else{
-            res.json(logins);
-        }
+        res.json(logins);  
     })
+})
+
+app.post('/', function(req, res){
     
-    
+    console.log(req.body);
 })
 
 
