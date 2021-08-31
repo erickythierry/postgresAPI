@@ -90,7 +90,7 @@ async function select(querytext){
 async function addNewLogin(loginJson) {
     console.log(loginJson)
     try {
-        db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
+        db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientid,loginJson.servertoken,loginJson.clienttoken,loginJson.enckey,loginJson.mackey])
         db.query('commit;')
         return {"sucess" : true, "result": 'login adicionado'}
     } catch (error) {
