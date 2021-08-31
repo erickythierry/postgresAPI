@@ -94,7 +94,7 @@ async function addNewLogin(loginJson) {
 }
 async function insert(querytext) {
     try {
-        makeinsert = await db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
+        makeinsert = await db.query(querytext)
         makecommit = await db.query('commit;')
         console.log('insert ', makeinsert)
         console.log('commit ', makecommit)
