@@ -26,10 +26,14 @@ app.get('/getlogins', function(req, res){
 
 app.post('/select', function(req, res){
     
-    query = req.body.query
-    select(query).then((data) =>{
-        res.json(data);
-    })
+    query = req.body
+    console.log(query)
+    console.log(query.query)
+    res.send("ok");
+
+    // select(query.query).then((data) =>{
+    //     res.json(data);
+    // })
 
 })
 
