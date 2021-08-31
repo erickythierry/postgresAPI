@@ -24,6 +24,14 @@ app.get('/getlogins', function(req, res){
     })
 })
 
+app.post('/newlogin', function(req, res){
+    
+    jsonlogin = req.body
+    addNewLogin(jsonlogin.login).then((data) =>{
+        res.json(data);
+    })
+})
+
 app.post('/select', function(req, res){
     
     querybody = req.body
@@ -35,10 +43,7 @@ app.post('/select', function(req, res){
 
 app.post('/insert', function(req, res){
     
-    querybody = req.body
-    insert(querybody.query).then((data) =>{
-        res.json(data);
-    })
+    
 
 })
 
@@ -85,10 +90,10 @@ async function addNewLogin(loginJson) {
     try {
         db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
         db.query('commit;')
-        return true
+        return {"sucess" : true, "result": 'login adicionado'}
     } catch (error) {
         console.log(error)
-        return undefined
+        return {"sucess": false, "result": error.message}
     }
     
 }
@@ -96,12 +101,10 @@ async function insert(querytext) {
     try {
         makeinsert = await db.query(querytext)
         makecommit = await db.query('commit;')
-        console.log('insert ', makeinsert)
-        console.log('commit ', makecommit)
-        return true
+        return {"sucess" : true, "result": makeinsert}
     } catch (error) {
         console.log(error)
-        return undefined
+        return {"sucess": false, "result": error.message}
     }
     
 }
