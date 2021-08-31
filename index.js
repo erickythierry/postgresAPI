@@ -33,6 +33,15 @@ app.post('/select', function(req, res){
 
 })
 
+app.post('/insert', function(req, res){
+    
+    querybody = req.body
+    addNewLogin(querybody.query).then((data) =>{
+        res.json(data);
+    })
+
+})
+
 async function getlogins() {
     try{
     auth_result = await db.query('select * from logins;');
