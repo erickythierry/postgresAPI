@@ -26,9 +26,9 @@ app.get('/getlogins', function(req, res){
 
 app.post('/select', function(req, res){
     
-    query = req.body
-    console.log(query)
-    console.log(query.query)
+    querybody = req.body
+    console.log(querybody)
+    console.log(querybody.query)
     res.send("ok");
 
     // select(query.query).then((data) =>{
@@ -64,9 +64,9 @@ async function getlogins() {
 
 }
 
-async function select(query){
+async function select(querytext){
     try{
-        makeSelect = await db.query(query);
+        makeSelect = await db.query(querytext);
         console.log('pesquisando...')
         return {"sucess" : true, "result": makeSelect.rows}
     } catch (error) {
