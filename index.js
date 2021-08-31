@@ -25,7 +25,7 @@ app.get('/getlogins', function(req, res){
 
 app.post('/', function(req, res){
     
-    res.json({requestBody: req.body})
+    res.json({requestBody: req})
 })
 
 
