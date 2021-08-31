@@ -14,7 +14,7 @@ app.listen(porta, function(){
 });
 
 app.get('/getlogins', function(req, res){
-    logins = getlogins()
+    logins = await getlogins()
     if (logins!=undefined){
         res.json({'sucess': true, "result": logins});
     }else{
