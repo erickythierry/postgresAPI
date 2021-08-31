@@ -1,6 +1,6 @@
 const db = require('./database');
 const express = require('express');
-var bodyParser = require('body-parser');
+
 
 
 const app = express();
@@ -9,6 +9,7 @@ const myhost = (req) => { return `http://${req.headers.host}`}
 const porta = process.env.PORT || 3000
 
 app.set('json spaces', 4)
+app.use(express.json())
 
 app.listen(porta, function(){
     console.log("escutando na porta ", porta)
@@ -24,7 +25,7 @@ app.get('/getlogins', function(req, res){
 
 app.post('/', function(req, res){
     
-    res.json(req.body);
+    res.json({requestBody: req.body})
 })
 
 
