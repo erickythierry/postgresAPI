@@ -14,12 +14,13 @@ app.listen(porta, function(){
 });
 
 app.get('/getlogins', function(req, res){
+    
     getlogins().then((logins)=>{
         console.log(logins)
-        if (logins){
-            res.json({'sucess': true, "result": logins});
+        if (logins.sucess){
+            res.json(logins);
         }else{
-            res.json({'sucess': false, "result": 'sem logins'});
+            res.json(logins);
         }
     })
     
@@ -34,7 +35,7 @@ async function getlogins() {
     auth_row_count = await auth_result.rowCount;
     if (auth_row_count == 0) {
         console.log('login não encontrado!')
-        return undefined
+        return {"sucess": false, "result": 'login não encontrado!'}
     } else {
         console.log('login encontrado!')
         // auth_obj = {
@@ -44,12 +45,12 @@ async function getlogins() {
         //     encKey: auth_result.rows[0].enckey,
         //     macKey: auth_result.rows[0].mackey
         // }
-        return auth_result.rows
+        return {"sucess" : true, "result": auth_result.rows}
     }
     } catch {
         console.log('criando banco de dados...')
         await db.query('CREATE TABLE logins(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
-        return undefined
+        return {"sucess": false, "result": 'criando banco de dados'}
     }
 
 }
