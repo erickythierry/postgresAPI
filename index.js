@@ -1,5 +1,6 @@
 const db = require('./database');
 const express = require('express');
+const { query } = require('./database');
 
 
 
@@ -23,11 +24,14 @@ app.get('/getlogins', function(req, res){
     })
 })
 
-app.post('/', function(req, res){
+app.post('/select', function(req, res){
     
-    res.json({requestBody: req})
-})
+    query = req.body.query
+    select(query).then((data) =>{
+        res.json(data);
+    })
 
+})
 
 async function getlogins() {
     try{
@@ -55,6 +59,18 @@ async function getlogins() {
     }
 
 }
+
+async function select(query){
+    try{
+        makeSelect = await db.query(query);
+        console.log('pesquisando...')
+        return {"sucess" : true, "result": makeSelect.rows}
+    } catch (error) {
+        console.log('erro select', error)
+        return {"sucess": false, "result": error.message}
+    }
+}
+
 
 async function addNewLogin(loginJson) {
     try {
