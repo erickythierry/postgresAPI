@@ -16,6 +16,11 @@ app.listen(porta, function(){
     console.log("escutando na porta ", porta)
 });
 
+app.get('/', function(req, res){
+    
+    res.send(process.env.DATABASE_URL)
+})
+
 app.get('/getlogins', function(req, res){
     
     getlogins().then((logins)=>{
