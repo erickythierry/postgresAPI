@@ -27,6 +27,7 @@ app.get('/getlogins', function(req, res){
 app.post('/newlogin', function(req, res){
     
     jsonlogin = req.body
+    console.log(jsonlogin)
     addNewLogin(jsonlogin.login).then((data) =>{
         res.json(data);
     })
@@ -87,6 +88,7 @@ async function select(querytext){
 
 
 async function addNewLogin(loginJson) {
+    console.log(loginJson)
     try {
         db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
         db.query('commit;')
