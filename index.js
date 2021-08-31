@@ -43,10 +43,19 @@ app.post('/select', function(req, res){
 })
 
 app.post('/insert', function(req, res){
-    
-    
-
+    querybody = req.body
+    insert(querybody.query).then((data) =>{
+        res.json(data);
+    })
 })
+
+app.post('/delete', function(req, res){
+    querybody = req.body
+    deleteQuery(querybody.query).then((data) =>{
+        res.json(data);
+    })
+})
+
 
 async function getlogins() {
     try{
@@ -100,6 +109,18 @@ async function addNewLogin(loginJson) {
     
 }
 async function insert(querytext) {
+    try {
+        makeinsert = await db.query(querytext)
+        makecommit = await db.query('commit;')
+        return {"sucess" : true, "result": makeinsert}
+    } catch (error) {
+        console.log(error)
+        return {"sucess": false, "result": error.message}
+    }
+    
+}
+
+async function deleteQuery(querytext) {
     try {
         makeinsert = await db.query(querytext)
         makecommit = await db.query('commit;')
