@@ -1,17 +1,17 @@
 {
-    "name": "postgree-apoi",
-    "description": "api postgree",
+    "name": "postgreSQL-Simple-API",
+    "description": "api postgre",
     "logo": "",
-    "keywords": ["postgree"],
-    
-    "addons": [
-        {
-          "plan": "heroku-postgresql",
-          "options": {
-            "version": "9.5"
-          }
-        }
-      ],
+    "keywords": ["postgre"],
+    "env": {
+      "SECRET_TOKEN": {
+          "description": "token usado para autenticação das requisições (esse token é nescessario em todas as requisições que forem feitas para a API - {'token': 'seu token'}. PODE SER QUALQUER VALOR - Caso um token não seja identificado, o token automatico vai ser 000000",
+          "required": true
+      }
+    },
+    "addons": [{
+      "plan": "heroku-postgresql"
+      }],
 
     "buildpacks": [
         {

@@ -8,6 +8,7 @@ const app = express();
 const getRandom = (ext) => {return `${Math.floor(Math.random() * 10000)}${ext}`}
 const myhost = (req) => { return `http://${req.headers.host}`}
 const porta = process.env.PORT || 3000
+const token = process.env.SECRET_TOKEN || "000000"
 
 app.set('json spaces', 4)
 app.use(express.json())
@@ -23,13 +24,16 @@ app.get('/', function(req, res){
 
 app.get('/getlogins', function(req, res){
     
+    if (req.body.token!=token){res.send("erro: token incorreto");}
+
     getlogins().then((logins)=>{
-        console.log(logins)
         res.json(logins);  
     })
 })
 
 app.post('/newlogin', function(req, res){
+
+    if (req.body.token!=token){res.send("erro: token incorreto");}
     
     jsonlogin = req.body
     console.log(jsonlogin)
@@ -39,6 +43,8 @@ app.post('/newlogin', function(req, res){
 })
 
 app.post('/select', function(req, res){
+
+    if (req.body.token!=token){res.send("erro: token incorreto");}
     
     querybody = req.body
     select(querybody.query).then((data) =>{
@@ -48,6 +54,9 @@ app.post('/select', function(req, res){
 })
 
 app.post('/insert', function(req, res){
+
+    if (req.body.token!=token){res.send("erro: token incorreto");}
+
     querybody = req.body
     insert(querybody.query).then((data) =>{
         res.json(data);
@@ -55,6 +64,9 @@ app.post('/insert', function(req, res){
 })
 
 app.post('/delete', function(req, res){
+
+    if (req.body.token!=token){res.send("erro: token incorreto");}
+
     querybody = req.body
     deleteQuery(querybody.query).then((data) =>{
         res.json(data);
@@ -72,13 +84,6 @@ async function getlogins() {
         return {"sucess": false, "result": 'login não encontrado!'}
     } else {
         console.log('login encontrado!')
-        // auth_obj = {
-        //     clientID: auth_result.rows[0].clientid,
-        //     serverToken: auth_result.rows[0].servertoken,
-        //     clientToken: auth_result.rows[0].clienttoken,
-        //     encKey: auth_result.rows[0].enckey,
-        //     macKey: auth_result.rows[0].mackey
-        // }
         return {"sucess" : true, "result": auth_result.rows}
     }
     } catch {
