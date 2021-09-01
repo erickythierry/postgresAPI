@@ -88,7 +88,7 @@ async function getlogins() {
     }
     } catch {
         console.log('criando banco de dados...')
-        await db.query('CREATE TABLE logins(clientID text, serverToken text, clientToken text, encKey text, macKey text);');
+        await db.query('CREATE TABLE logins("clientID" text, "serverToken" text, "clientToken" text, "encKey" text, "macKey" text);');
         return {"sucess": false, "result": 'criando banco de dados'}
     }
 
@@ -109,7 +109,7 @@ async function select(querytext){
 async function addNewLogin(loginJson) {
     console.log(loginJson)
     try {
-        db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientid,loginJson.servertoken,loginJson.clienttoken,loginJson.enckey,loginJson.mackey])
+        db.query('INSERT INTO logins VALUES($1,$2,$3,$4,$5);',[loginJson.clientID,loginJson.serverToken,loginJson.clientToken,loginJson.encKey,loginJson.macKey])
         db.query('commit;')
         return {"sucess" : true, "result": 'login adicionado'}
     } catch (error) {
